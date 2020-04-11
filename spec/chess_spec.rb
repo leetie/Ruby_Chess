@@ -7,7 +7,11 @@ describe Board do
   end
 
   it "is an 8x8 array" do
-    expect(subject.board).to eql(Array.new(8) {Array.new(8, "-")})
+    expect(subject.board).to eql(Array.new(8) {Array.new(8, " ")})
+  end
+
+  it "prints the board" do
+    expect(subject.print_board)
   end
 end
 
