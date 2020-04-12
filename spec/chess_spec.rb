@@ -1,13 +1,10 @@
 require './lib/board.rb'
 require './lib/pieces/piece.rb'
+Dir["./lib/**/*.rb"].each {|file| require file}
 
 describe Board do
   it "is an array" do
     expect(subject.board).to be_an(Array)
-  end
-
-  it "is an 8x8 array" do
-    expect(subject.board).to eql(Array.new(8) {Array.new(8, " ")})
   end
 
   it "prints the board" do
@@ -17,6 +14,18 @@ end
 
 describe Piece do
   it "has an initial 'moved' variable of 0" do
-    expect(subject.moved).to eql(0)
+    piece = Piece.new(0,0)
+    expect(piece.moved).to eql(0)
+  end
+end
+
+describe Player do
+  it "has a name instance variable" do
+    jesse = Player.new("jesse")
+    expect(jesse.name).to eql("jesse")
+  end
+  it "gets a move with the get_move method" do
+    jesse = Player.new("jesse")
+    expect(jesse.get_move).to eql(["a",1])
   end
 end
