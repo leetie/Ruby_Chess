@@ -1,6 +1,6 @@
 require_relative 'piece'
 
-class Bishop
+class Bishop < Piece
   def initialize(x,y,black=true)
     super(x,y)
     if black == true

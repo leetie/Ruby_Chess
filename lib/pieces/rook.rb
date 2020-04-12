@@ -6,7 +6,7 @@ class Rook < Piece
     if black == true
       @text_content = "\u265c ".yellow
     else
-      @text_content = "\u265c".white
+      @text_content = "\u265c ".white
     end
   end
 end

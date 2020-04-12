@@ -1,7 +1,6 @@
 require_relative 'piece'
 
-class Queen
-
+class Queen < Piece
   def initialize(x,y,black=true)
     super(x,y)
     if black == true

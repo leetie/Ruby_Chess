@@ -1,13 +1,12 @@
 require_relative 'piece'
 
 class Knight < Piece
-
   def initialize(x,y, black=true)
     super(x,y)
     if black == true
       @text_content = "\u265e ".yellow
     else
-      @text_content = "\u2658 ".white
+      @text_content = "\u265e ".white
     end
   end
 

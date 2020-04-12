@@ -1,7 +1,6 @@
 require_relative 'piece'
 
-class Pawn
-
+class Pawn < Piece
   def initialize(x,y,black=true)
     super(x,y)
     if black == true
