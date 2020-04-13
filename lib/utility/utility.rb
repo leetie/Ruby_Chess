@@ -90,20 +90,19 @@ module Utility
     end
   end
 
-  def check_ownership
-    if @board.board[@current_player.find_beginning_pos[0]][@current_player.find_beginning_pos[1]].piece_color == @current_player.piece_color
-      puts "piece doesn't belong do you"
-    else
-      puts "that is your piece"
-    end
-  end
+  # def check_ownership
+  #   if @board.board[@current_player.find_own_piece[0]][@current_player.find_own_piece[1]].piece_color == @current_player.piece_color
+  #     puts "piece doesn't belong do you"
+  #   else
+  #     puts "that is your piece"
+  #   end
+  # end
 end
 
 class String
+  attr_accessor :text_content
   def text_content
     self
   end
-  def piece_color
-    "default"
-  end
+
 end

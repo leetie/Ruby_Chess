@@ -2,7 +2,8 @@ require 'colorize'
 
 class Piece
   include Enumerable
-  attr_reader :moved, :text_content, :cur_pos, :piece_color
+  attr_reader :moved, :cur_pos, :piece_color
+  attr_accessor :text_content
 
   def initialize(x, y)
     @moved = 0
