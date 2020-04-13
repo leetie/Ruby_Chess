@@ -83,27 +83,39 @@ module Utility
   end
 
   def switch_players
-    if self.current_player == @player_1
-      self.current_player = @player_2
+    if self.current_player == @p1
+      self.current_player = @p2
     else
-      self.current_player = @player_1
+      self.current_player = @p1
     end
   end
 
-  def check_ownership
-    if @board.board[@current_player.find_beginning_pos[0]][@current_player.find_beginning_pos[1]].piece_color == @current_player.piece_color
-      puts "piece doesn't belong do you"
-    else
-      puts "that is your piece"
-    end
+  def process_choice
+    self.board.board[@current_player.desired_end[0]][@current_player.desired_end[1]] = self.board.board[@current_player.desired_start[0]][@current_player.desired_start[1]]
+
+    self.board.board[@current_player.desired_start[0]][@current_player.desired_start[1]] = self.board.text_content
+  #   self.board.plug(self.current_player.desired_end[0], self.current_player.desired_end[1]) = self.board.plug(self.current_player.desired_start[0], self.current_player.desired_start[1])
+
+  #   # self.board.plug(self.current_player.desired_start[0], self.current_player.desired_start[1]) = self.board.text_content
   end
+    
+    
+
+  # def check_ownership
+  #   if @board.board[@current_player.find_own_piece[0]][@current_player.find_own_piece[1]].piece_color == @current_player.piece_color
+  #     puts "piece doesn't belong do you"
+  #   else
+  #     puts "that is your piece"
+  #   end
+  # end
 end
 
 class String
+  attr_accessor :text_content
   def text_content
     self
   end
   def piece_color
-    "default"
+    "untaken"
   end
 end
