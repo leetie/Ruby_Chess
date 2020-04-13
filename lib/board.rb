@@ -5,6 +5,7 @@ Dir["./pieces/*.rb"].each {|file| require file}
 
 class Board
   attr_accessor :board
+  attr_reader :text_content
   def initialize
     @text_content = "  "
     @board = Array.new(8) {Array.new(8, @text_content)}
@@ -12,19 +13,23 @@ class Board
     
   end
 
+
+  #possible solutions
+    #seperate output board and working board for purposes of gui
+    #
   def set_board_color
     #fix this mess
       8.times do |i|
         8.times do |j|
           if i % 2 == 0 && j % 2 == 0
-            @board[i][j].text_content.colorize(:background => :black)
+            @board[i][j].text_content = @board[i][j].text_content.colorize(:background => :black)
             if @board[i][j+1]
-              @board[i][j+1].text_content.colorize(:background => :blue)
+              @board[i][j+1].text_content = @board[i][j+1].text_content.colorize(:background => :blue)
             end
           elsif i % 2 != 0 && j % 2 != 0
-            @board[i][j].text_content.colorize(:background => :black)
+            @board[i][j].text_content = @board[i][j].text_content.colorize(:background => :black)
             if @board[i][j+1]
-              @board[i][j+1].text_content.colorize(:background => :blue)
+              @board[i][j+1].text_content = @board[i][j+1].text_content.colorize(:background => :blue)
             end
           end
         end
@@ -50,9 +55,9 @@ class Board
     puts "  A  B C D E F G H"
   end
 
-  # def plug(x,y)
-  #   return self.board[x.to_i][y.to_i]
-  # end
+  def plug(x,y)
+    return self.board[x][y]
+  end
 end
 
 # board = Board.new
