@@ -22,34 +22,34 @@ module Utility
     @board[0][5] = @wb2
 
     @wk2 = Knight.new(0,6,false)
-    @board[0][6] = @wb2
+    @board[0][6] = @wk2
 
     @wr2 = Rook.new(0,7,false)
     @board[0][7] = @wr2
 
     #black pieces
-    @br1 = Rook.new(0,0)
+    @br1 = Rook.new(7,0)
     @board[7][0] = @br1
 
-    @bk1 = Knight.new(0,1)
+    @bk1 = Knight.new(7,1)
     @board[7][1] = @bk1
 
-    @bb1 = Bishop.new(0,2)
+    @bb1 = Bishop.new(7,2)
     @board[7][2] = @bb1
 
-    @bk = King.new(0,3)
+    @bk = King.new(7,3)
     @board[7][3] = @bk
 
-    @bq = Queen.new(0,4)
+    @bq = Queen.new(7,4)
     @board[7][4] = @bq
 
-    @bb2 = Bishop.new(0,5)
+    @bb2 = Bishop.new(7,5)
     @board[7][5] = @bb2
 
-    @bk2 = Knight.new(0,6)
-    @board[7][6] = @bb2
+    @bk2 = Knight.new(7,6)
+    @board[7][6] = @bk2
 
-    @br2 = Rook.new(0,7)
+    @br2 = Rook.new(7,7)
     @board[7][7] = @br2
     
     #pawn pieces
@@ -83,31 +83,49 @@ module Utility
   end
 
   def switch_players
-    if self.current_player == @p1
-      self.current_player = @p2
+    if self.cp == @p1
+      self.cp = @p2
     else
-      self.current_player = @p1
+      self.cp = @p1
     end
   end
 
-  def process_choice
-    self.board.board[@current_player.desired_end[0]][@current_player.desired_end[1]] = self.board.board[@current_player.desired_start[0]][@current_player.desired_start[1]]
-
-    self.board.board[@current_player.desired_start[0]][@current_player.desired_start[1]] = self.board.text_content
-  #   self.board.plug(self.current_player.desired_end[0], self.current_player.desired_end[1]) = self.board.plug(self.current_player.desired_start[0], self.current_player.desired_start[1])
-
-  #   # self.board.plug(self.current_player.desired_start[0], self.current_player.desired_start[1]) = self.board.text_content
+  def board_pos(ary)
+    return @board.board[ary[0]][ary[1]]
   end
-    
-    
 
-  # def check_ownership
-  #   if @board.board[@current_player.find_own_piece[0]][@current_player.find_own_piece[1]].piece_color == @current_player.piece_color
-  #     puts "piece doesn't belong do you"
-  #   else
-  #     puts "that is your piece"
-  #   end
-  # end
+  def process_choice
+    self.board.board[@cp.de[0]][@cp.de[1]] = self.board.board[@cp.ds[0]][@cp.ds[1]]
+
+    self.board.board[@cp.ds[0]][@cp.ds[1]] = self.board.text_content
+
+    # self.board_pos(@cp.de) = self.board_pos(@cp.ds)
+    # self.board_pos(@cp.ds) = self.board.text_content
+  #   self.board.plug(self.cp.de[0], self.cp.de[1]) = self.board.plug(self.cp.ds[0], self.cp.ds[1])
+
+  #   # self.board.plug(self.cp.ds[0], self.cp.ds[1]) = self.board.text_content
+  end
+
+  def compute_choice
+    if self.check_ownership == true
+      if self.board_pos(@cp.ds).possible_moves(self).include?(@cp.de)
+        self.process_choice
+        self.board_pos(@cp.de).cur_pos = @cp.de
+        #sets piece's 'moved' variable to !0
+        self.board_pos(@cp.de).moved += 1
+      else
+        puts "Invalid move, try again"
+        @cp.get_move
+        self.compute_choice
+        # puts "cp is #{@cp.name}"
+        # puts "cp ds = #{@cp.ds}"
+        # puts "cp de = #{@cp.de}"
+        # puts "cp piece color is #{@cp.piece_color}"
+        # puts "cur_pos of #{@cp.ds} is #{self.board_pos(@cp.ds).cur_pos}"
+        # puts self.board_pos(@cp.ds).piece_color
+      end
+    end
+  end
 end
 
 class String

@@ -12,7 +12,7 @@ class Knight < Piece
     end
   end
 
-  def possible_moves(x=@position_x, y=@position_y)
+  def possible_moves(obj,x=@cur_pos[0], y=@cur_pos[1])
     @legal_moves = []
     @possible_moves = [
       [x - 2, y + 1],
@@ -28,6 +28,7 @@ class Knight < Piece
       [x - 1, y - 2]
       ]
     @possible_moves.each do |x|
+      #cant go off board
       if (x[0] < 8) && (x[1] < 8) && (x[0] >= 0) && (x[1] >= 0)
         @legal_moves << x
       end
