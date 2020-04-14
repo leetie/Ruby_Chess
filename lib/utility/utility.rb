@@ -90,6 +90,10 @@ module Utility
     end
   end
 
+  def board_pos(ary)
+    return @board.board[ary[0]][ary[1]]
+  end
+
   def process_choice
     self.board.board[@cp.de[0]][@cp.de[1]] = self.board.board[@cp.ds[0]][@cp.ds[1]]
 
@@ -104,7 +108,7 @@ module Utility
 
   def compute_choice
     if self.check_ownership == true
-      if self.board_pos(@cp.ds).possible_moves.include?(@cp.de)
+      if self.board_pos(@cp.ds).possible_moves(self).include?(@cp.de)
         self.process_choice
         self.board_pos(@cp.de).cur_pos = @cp.de
         #sets piece's 'moved' variable to !0
@@ -122,16 +126,6 @@ module Utility
       end
     end
   end
-    
-    
-
-  # def check_ownership
-  #   if @board.board[@cp.find_own_piece[0]][@cp.find_own_piece[1]].piece_color == @cp.piece_color
-  #     puts "piece doesn't belong do you"
-  #   else
-  #     puts "that is your piece"
-  #   end
-  # end
 end
 
 class String
