@@ -12,7 +12,7 @@ class Knight < Piece
     end
   end
 
-  def possible_moves(x=@position_x, y=@position_y)
+  def possible_moves(x=@cur_pos[0], y=@cur_pos[1])
     @legal_moves = []
     @possible_moves = [
       [x - 2, y + 1],

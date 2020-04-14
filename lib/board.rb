@@ -8,7 +8,7 @@ class Board
   attr_reader :text_content
   def initialize
     @text_content = "  "
-    @board = Array.new(8) {Array.new(8, @text_content)}
+    @board = Array.new(8) {Array.new(8, "  ")}
     self.set_pieces
     
   end
@@ -23,20 +23,42 @@ class Board
         8.times do |j|
           if i % 2 == 0 && j % 2 == 0
             @board[i][j].text_content = @board[i][j].text_content.colorize(:background => :black)
+            if @board[i][j].is_a?(String)
+              @board[i][j] = @board[i][j].colorize(:background => :black)
+            end
+
             if @board[i][j+1]
               @board[i][j+1].text_content = @board[i][j+1].text_content.colorize(:background => :blue)
+              if @board[i][j+1].is_a?(String)
+                @board[i][j+1] = @board[i][j+1].colorize(:background => :blue)
+              end
             end
+
+
           elsif i % 2 != 0 && j % 2 != 0
             @board[i][j].text_content = @board[i][j].text_content.colorize(:background => :black)
+            if @board[i][j].is_a?(String)
+              @board[i][j] = @board[i][j].colorize(:background => :black)
+            end
+
+
             if @board[i][j+1]
               @board[i][j+1].text_content = @board[i][j+1].text_content.colorize(:background => :blue)
+              if @board[i][j+1].is_a?(String)
+                @board[i][j+1] = @board[i][j+1].colorize(:background => :blue)
+              end
             end
+
+
           end
         end
       end
       8.times do |i|
         if i % 2 != 0
           @board[i][0].text_content = @board[i][0].text_content.colorize(:background => :blue)
+          if @board[i][0].is_a?(String)
+            @board[i][0] = @board[i][0].colorize(:background => :blue)
+          end
         end
       end
   end
